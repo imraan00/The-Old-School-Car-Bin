@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Old School Car Bin | Restomod Excellence</title>
+    <style>
+        :root {
+            /* Gold and Black Palette */
+            --bg-black: #0a0a0a;          /* Rich Onyx */
+            --accent-black: #1a1a1a;      /* Lighter Charcoal */
+            --gold-bright: #d4af37;       /* 24K Gold */
+            --gold-metallic: #b8860b;     /* Dark Goldenrod */
+            --text-white: #ffffff;
+            --border-gold: #8b6d1b;
+            --champagne: #f1d592;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: var(--gold-bright);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--bg-black);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        /* Desktop Nav Links */
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links button {
+            background: var(--bg-black);
+            border: 2px solid var(--bg-black);
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-left: 8px;
+            padding: 10px 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .nav-links button:hover {
+            background: var(--gold-metallic);
+            border-color: var(--gold-metallic);
+            color: var(--bg-black);
+        }
+
+        .nav-links button.active {
+            background: transparent;
+            color: var(--bg-black);
+            border: 2px solid var(--bg-black);
+        }
+
+        /* Mobile Menu Icon */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 4px;
+            background: var(--bg-black);
+            border-radius: 2px;
+        }
+
+        /* MOBILE OVERLAY MENU */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--gold-bright);
+                padding: 1rem;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.mobile-active {
+                display: flex;
+            }
+
+            .nav-links button {
+                margin: 5px 0;
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* PAGE SYSTEM */
+        .page {
+            display: none;
+            padding: 4rem 8%;
+            min-height: 85vh;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* HOME PAGE HERO */
+        #home-hero {
+            text-align: center;
+            padding: 6rem 5%;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                        url('https://wallpaperaccess.com/full/39382.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 5px solid var(--gold-bright);
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            color: var(--gold-bright);
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: var(--champagne);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 30px;
+            border: 1px solid var(--gold-metallic);
+            border-radius: 10px;
+        }
+
+        .feature-card h3 {
+            color: var(--gold-bright);
+            text-transform: uppercase;
+        }
+
+        /* SHOWROOM */
+        .showroom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .car-card {
+            background: var(--accent-black);
+            border: 3px solid var(--gold-bright);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .car-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .car-card:hover img {
+            filter: grayscale(0%);
+        }
+
+        .car-label {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            background: var(--gold-bright);
+            color: var(--bg-black);
+        }
+
+                /* INFO CONTAINERS */
+        .info-container { background: var(--gold-bright); color: var(--bg-black); padding: 50px; border-radius: 12px; max-width: 900px; margin: 0 auto; text-align: center; }
+        
+        /* CONTACT LINKS - NEW */
+        .contact-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-link-card {
+            background: var(--bg-black);
+            color: var(--gold-bright);
+            padding: 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+        }
+
+        .contact-link-card:hover {
+            border-color: var(--bg-black);
+            background: #222;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .contact-link-card small {
+            color: var(--champagne);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .placeholder-text {
+            border: 2px dashed var(--bg-black);
+            padding: 40px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 2px solid var(--bg-black);
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            background: var(--bg-black);
+            color: var(--gold-bright);
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover {
+            background: #222;
+        }
+
+        footer {
+            background: #000;
+            text-align: center;
+            padding: 30px;
+            color: var(--gold-metallic);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--gold-metallic);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="showPage('home')">The Old School Bin</div>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <button onclick="showPage('home')" id="btn-home" class="active">Home</button>
+            <button onclick="showPage('showroom')" id="btn-showroom">Showroom</button>
+            <button onclick="showPage('about')" id="btn-about">About Us</button>
+            <button onclick="showPage('contact')" id="btn-contact">Contact Us</button>
+        </div>
+    </nav>
+
+    <main id="home" class="page active">
+        <section id="home-hero">
+            <h1 class="hero-title">Vintage Soul. <br>Modern DNA.</h1>
+            <p class="hero-subtitle">We bridge the gap between automotive eras. At The Old School Car Bin, we restore classics to their former glory—then inject them with 21st-century performance.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Classic Aesthetics</h3>
+                    <p>Preserving the timeless silhouettes that defined generations of luxury and speed.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Modern Performance</h3>
+                    <p>Engineered for today. Precision handling and reliability meets vintage steel.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Luxury Interiors</h3>
+                    <p>Hand-crafted cabins featuring modern ergonomics and premium materials.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="showroom" class="page">
+        <h2 style="color: var(--gold-bright); font-size: 2.5rem; text-transform: uppercase; border-left: 5px solid var(--gold-bright); padding-left: 15px;">The Showroom</h2>
+        <div class="showroom-grid">
+            <div class="car-card"><img src="Mercedes-Benz W114.jpeg"><div class="car-label">Mercedes-Benz W114/115</div></div>
+            <div class="car-card"><img src="Mercedes-Benz S-Class Coupe.jpeg"><div class="car-label">Mercedes-Benz S-Class Coupe</div></div>
+            <div class="car-card"><img src="BMW E30 M3.jpeg"><div class="car-label">BMW E30 M3</div></div>
+            <div class="car-card"><img src="E30 Carbon Edition.jpeg"><div class="car-label">E30 Carbon Edition</div></div>
+            <div class="car-card"><img src="BMW E30 Coupe.jpeg"><div class="car-label">BMW E30 Coupe</div></div>
+            <div class="car-card"><img src="BMW 2002.jpeg"><div class="car-label">BMW 2002</div></div>
+            <div class="car-card"><img src="Mercedes-Benz Classic Detail.jpeg"><div class="car-label">Mercedes-Benz Classic Detail</div></div>
+        </div>
+    </section>
+
+    <section id="about" class="page">
+        <div class="info-container">
+            <h2 style="text-transform: uppercase; letter-spacing: 2px;">Our Philosophy</h2>
+            <div class="placeholder-text">
+                At The Old School Bin, our passion lies in the intersection of heritage and innovation. We believe every classic car has a story that deserves a modern chapter. Our meticulous restoration process ensures that every vehicle not only looks like a masterpiece but drives like a contemporary marvel.
+            </div>
+        </div>
+    </section>
+
+     <section id="contact" class="page">
+        <div class="info-container">
+            <h2 style="text-transform: uppercase; letter-spacing: 2px;">Connect With The Bin</h2>
+            <p>Ready to start your restomod journey? Reach out via the channels below.</p>
+            
+            <div class="contact-links-grid">
+                <a href="https://wa.me/27847865336" class="contact-link-card" target="_blank">
+                    <small>Chat on WhatsApp</small>
+                    084 786 5336
+                </a>
+                
+                <a href="mailto:info@theoldschoolcarbin.co.za" class="contact-link-card">
+                    <small>General Inquiries</small>
+                    info@theoldschoolcarbin.co.za
+                </a>
+                
+                <a href="mailto:sales@theoldschoolcarbin.co.za" class="contact-link-card">
+                    <small>Sales & Commissions</small>
+                    sales@theoldschoolcarbin.co.za
+                </a>
+                
+                <a href="https://www.tiktok.com/@theoldschoolcarbin" class="contact-link-card" target="_blank">
+                    <small>Follow Our Builds</small>
+                    TikTok Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 THE OLD SCHOOL CAR BIN | RESTORING THE FUTURE | ALL RIGHTS RESERVED
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('mobile-active');
+        }
+
+        function showPage(pageId) {
+            const nav = document.getElementById('navLinks');
+            nav.classList.remove('mobile-active');
+
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.nav-links button');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById('btn-' + pageId).classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
